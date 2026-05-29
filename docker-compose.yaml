@@ -1,0 +1,21 @@
+services:
+  http-server-projeto-korp:
+    build:
+      context: ./app
+    container_name: http-server-projeto-korp
+    networks:
+      - korp-network
+
+  nginx:
+    image: nginx:1.30.2-alpine3.23
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      - korp-network
+
+networks:
+  korp-network:
+    driver: bridge
