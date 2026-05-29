@@ -1,0 +1,22 @@
+services:
+  http-server-projeto-korp:
+    build:
+      context: ./app
+    container_name: http-server-projeto-korp
+    networks:
+      - korp-network
+    restart: unless-stopped
+
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    networks:
+      - korp-network
+    restart: unless-stopped
+
+networks:
+  korp-network:
+    driver: bridge
