@@ -17,6 +17,21 @@ services:
       - korp-network
     restart: unless-stopped
 
+  prometheus:
+    build:
+      context: ./prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - korp-network
+    restart: unless-stopped
+    volumes:
+      - prometheus_data:/prometheus
+
 networks:
   korp-network:
     driver: bridge
+
+volumes:
+  prometheus_data:
