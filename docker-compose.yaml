@@ -5,16 +5,17 @@ services:
     container_name: http-server-projeto-korp
     networks:
       - korp-network
+    restart: unless-stopped
 
   nginx:
-    image: nginx:1.30.2-alpine3.23
+    build:
+      context: ./nginx
     container_name: nginx
     ports:
       - "80:80"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
     networks:
       - korp-network
+    restart: unless-stopped
 
 networks:
   korp-network:
