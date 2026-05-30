@@ -1,0 +1,8 @@
+*.md
+*.log
+.DS_Store
+.git/
+.vscode/
+.idea/
+*_test.go
+testdata/

@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type KorpProjectResponse struct {
@@ -25,6 +27,7 @@ func KorpProjectHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /projeto-korp", KorpProjectHandler)
+	mux.Handle("GET /metrics", promhttp.Handler())
 
 	log.Println("Server listenning on :8080")
 	log.Fatal(http.ListenAndServe(":8080", mux))
