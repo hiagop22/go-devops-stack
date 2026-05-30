@@ -28,6 +28,17 @@ services:
     restart: unless-stopped
     volumes:
       - prometheus_data:/prometheus
+  
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter:1.5.1
+    container_name: nginx-exporter
+    ports:
+      - "9113:9113"
+    networks:
+      - korp-network
+    restart: unless-stopped
+    depends_on:
+      - nginx
 
   grafana:
     build:
@@ -48,7 +59,7 @@ services:
       - .env
     depends_on:
       - prometheus
-      
+      - nginx-exporter
 
 networks:
   korp-network:
