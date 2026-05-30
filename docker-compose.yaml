@@ -37,6 +37,13 @@ services:
     restart: unless-stopped
     depends_on:
       - nginx
+  
+  node-exporter:
+    image: prom/node-exporter:v1.11.1
+    container_name: node-exporter
+    networks:
+      - korp-network
+    restart: unless-stopped
 
   grafana:
     build:
