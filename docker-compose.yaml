@@ -79,6 +79,8 @@ services:
     depends_on:
       - prometheus
       - nginx-exporter
+      - node-exporter
+      - cadvisor
 
 networks:
   korp-network:
