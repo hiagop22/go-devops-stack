@@ -22,10 +22,19 @@ func KorpProjectHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-type", "application/json")
 	json.NewEncoder(w).Encode(response)
+
+}
+
+func HealthHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+	json.NewEncoder(w).Encode(map[string]string{"status": "OK"})
 }
 
 func main() {
 	mux := http.NewServeMux()
+	mux.HandleFunc("GET /health", HealthHandler)
 	mux.HandleFunc("GET /projeto-korp", KorpProjectHandler)
 	mux.Handle("GET /metrics", promhttp.Handler())
 
