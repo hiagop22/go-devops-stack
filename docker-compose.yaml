@@ -32,8 +32,6 @@ services:
   nginx-exporter:
     image: nginx/nginx-prometheus-exporter:1.5.1
     container_name: nginx-exporter
-    ports:
-      - "9113:9113"
     networks:
       - korp-network
     restart: unless-stopped
